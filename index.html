@@ -2,93 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Stopwatch</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .stopwatch {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        #time {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 15px;
-            margin: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <title> Garment Billing</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="stopwatch">
-        <div id="time">00:00:00</div>
+<div class="bill-container">
 
-        <button onclick="start()">Start</button>
-        <button onclick="stop()">Stop</button>
-        <button onclick="reset()">Reset</button>
+    <!-- SHOP HEADER -->
+    <div class="shop-header">
+        <h1>MY GARMENT</h1>
+        <p>
+            Indira Nagar, New Baijipura near Motiwala Nagar Road Line No 21,<br>
+            Aurangabad - 431001<br>
+            
+        </p>
     </div>
 
-    <script>
-        let seconds = 0;
-        let minutes = 0;
-        let hours = 0;
-        let timer = null;
+    <hr>
 
-        function updateTime() {
-            seconds++;
+    <!-- BILL INFO -->
+    <div class="bill-info">
+        <div>Date: <input type="date"></div>
+        <div>Bill No: <input type="text" placeholder="2"></div>
+    </div>
 
-            if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-            }
+    <!-- INPUT ROW -->
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
 
-            if (minutes === 60) {
-                minutes = 0;
-                hours++;
-            }
+        <tbody id="billBody">
+            <!-- JS will add rows here -->
+        </tbody>
+    </table>
 
-            document.getElementById("time").innerText =
-                String(hours).padStart(2, '0') + ":" +
-                String(minutes).padStart(2, '0') + ":" +
-                String(seconds).padStart(2, '0');
-        }
+    <button onclick="addRow()">➕ Add Item</button>
 
-        function start() {
-            if (timer !== null) return;
-            timer = setInterval(updateTime, 1000);
-        }
+    <!-- TOTAL -->
+    <div class="total-box">
+        Total: ₹ <span id="total">0</span>
+    </div>
 
-        function stop() {
-            clearInterval(timer);
-            timer = null;
-        }
+    <!-- PRINT -->
+    <button class="print-btn" onclick="window.print()">🖨 Print Bill</button>
 
-        function reset() {
-            stop();
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
-            document.getElementById("time").innerText = "00:00:00";
-        }
-    </script>
+</div>
 
+<script src="script.js"></script>
 </body>
 </html>
